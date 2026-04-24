@@ -19,15 +19,7 @@ If your business is missing from that shortlist, you are invisible at the decisi
 
 This is the short answer: a page can rank well on Google and still be too vague, too broad, too inconsistent, or too hard for ChatGPT to reuse cleanly.
 
-> [IMAGE PLACEHOLDER 1: search-ranking-vs-ai-answer-shortlist]
-> Suggested placement: Keep this image here, after the introduction and before the first main section.
-> LLM image instructions:
-> - Goal: Show the difference between ranking in traditional search and being selected inside an AI answer.
-> - Prompt: Create a clean editorial-style split-screen illustration for a business blog. On the left, show a Google-style search results page with a business ranking visibly on page one. On the right, show a ChatGPT-style answer panel giving a shortlist of businesses where that same business is missing. Make the contrast obvious: visible in search, absent in the AI answer. Use a modern SaaS visual language with blue and amber accents, clean UI blocks, simple charts, and subtle depth. Add a short overlay headline inside the image: "Ranked on Google. Missing in ChatGPT.".
-> - Style: Professional editorial infographic, modern B2B SaaS, minimal, sharp, high-contrast, white background.
-> - Dimensions: 1200 x 630.
-> - Alt text: Split-screen graphic showing a business ranking on Google but missing from a ChatGPT shortlist.
-> - Avoid: No actual Google or OpenAI logos, no gibberish UI text, no clutter, no cartoon style.
+
 
 ## Google ranking and ChatGPT mentions are different jobs
 
@@ -95,15 +87,7 @@ That means two or three clear sentences can do more for AI visibility than a lon
 
 If your content sounds good but says little in a reusable way, ChatGPT has less reason to mention you.
 
-> [IMAGE PLACEHOLDER 2: what-chatgpt-needs-to-mention-a-business]
-> Suggested placement: Keep this image here, after the section explaining the five things ChatGPT needs.
-> LLM image instructions:
-> - Goal: Visualise the five signals that make a business easier for AI systems to mention.
-> - Prompt: Create a structured infographic titled "What ChatGPT Needs Before It Mentions a Business". Show five connected blocks feeding into a central AI answer box. The five blocks should represent: clear company description, answer-first page structure, consistent facts across sources, strong supporting evidence, and content that breaks into reusable chunks. Use simple icons for each block, clean arrows, and a polished editorial layout. The end state should show an AI answer card that looks confident, clear, and specific.
-> - Style: Flat editorial infographic, clean business design, blue and amber palette, white background, minimal but credible.
-> - Dimensions: 1200 x 900.
-> - Alt text: Diagram showing five signals feeding into an AI answer that mentions a business clearly.
-> - Avoid: No busy backgrounds, no fake brand names, no dense paragraphs inside the graphic, no glossy 3D effects.
+
 
 ## Why competitors get named instead of you
 
@@ -129,15 +113,7 @@ That matters because users do not take AI answers at face value in a vacuum. The
 
 The brand that looks more certain often gets the mention.
 
-> [IMAGE PLACEHOLDER 3: clearer-brand-vs-blurry-brand-comparison]
-> Suggested placement: Keep this image here, after the competitor comparison section and before the diagnosis section.
-> LLM image instructions:
-> - Goal: Show why a clearer competitor gets chosen over a blurrier brand.
-> - Prompt: Create a side-by-side comparison graphic for a B2B blog. On the left, show a "blurry brand" with vague labels, scattered facts, weak FAQ coverage, and inconsistent signals across website, profile, and mentions. On the right, show a "clear brand" with a direct category, clean service page structure, strong FAQ coverage, and consistent supporting references. At the top, add a short title: "The clearer brand gets the mention". Make the right side look more trustworthy and easier for AI to interpret, without making it feel like a sales ad.
-> - Style: Editorial comparison infographic, professional, structured, subtle visual tension, white background with blue and amber accents.
-> - Dimensions: 1200 x 900.
-> - Alt text: Comparison graphic showing a vague brand versus a clear brand, with the clearer brand being chosen by AI.
-> - Avoid: No logos, no exaggerated red-vs-green cliché styling, no complex jargon blocks, no photoreal people.
+
 
 ## How to tell if this is already happening
 
@@ -219,15 +195,7 @@ If your facts are present but hard to extract, inconsistent across sources, or b
 
 The first job is not more content. It is better-shaped information.
 
-> [IMAGE PLACEHOLDER 4: from-invisible-to-mentioned-roadmap]
-> Suggested placement: Keep this image here, after the fixes section and before the key takeaways.
-> LLM image instructions:
-> - Goal: Show the practical sequence for improving AI visibility.
-> - Prompt: Create a clean roadmap-style infographic titled "From Invisible to Mentioned". Show five steps moving left to right: baseline what AI says now, tighten the core company description, rebuild key pages into answer-first pages, strengthen supporting signals beyond the site, and retest across AI platforms. Each step should have a simple icon and one short plain-English label. End with a final outcome card that says "Clearer brand, stronger AI mention". Make it feel useful, practical, and easy to scan.
-> - Style: Modern process infographic, editorial business design, minimal, clear spacing, white background, blue and amber accents.
-> - Dimensions: 1200 x 630.
-> - Alt text: Five-step roadmap showing how a business moves from being invisible in AI answers to being clearly mentioned.
-> - Avoid: No heavy gradients, no tiny text, no fake dashboard overload, no abstract art.
+
 
 ## Key takeaways
 
