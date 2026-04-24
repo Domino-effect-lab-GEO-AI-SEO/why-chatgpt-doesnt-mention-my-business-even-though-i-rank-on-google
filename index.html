@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why ChatGPT Misses Your Business When Google Ranks It</title>
+  <meta name="description" content="Why can a business rank on Google but stay invisible in ChatGPT? Learn what AI needs to mention, trust, and reuse your brand in the final answer.">
+  <style>
+    :root {
+      --ink: #132238;
+      --ink-soft: #41506b;
+      --paper: #f7f3ea;
+      --paper-deep: #efe5d5;
+      --card: rgba(255, 255, 255, 0.88);
+      --card-strong: rgba(255, 255, 255, 0.96);
+      --line: rgba(19, 34, 56, 0.12);
+      --line-strong: rgba(19, 34, 56, 0.22);
+      --blue: #2563eb;
+      --blue-deep: #183b91;
+      --amber: #f3a321;
+      --amber-deep: #cb7a00;
+      --mint: #dff4ef;
+      --shadow: 0 18px 60px rgba(19, 34, 56, 0.12);
+      --shadow-soft: 0 10px 30px rgba(19, 34, 56, 0.08);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(243, 163, 33, 0.18), transparent 24%),
+        linear-gradient(180deg, #fdf9f3 0%, var(--paper) 42%, #f4efe5 100%);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(19, 34, 56, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(19, 34, 56, 0.03) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.32), transparent 75%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(19, 34, 56, 0.08);
+      z-index: 30;
+    }
+
+    .progress-bar > span {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--blue) 0%, var(--amber) 100%);
+      box-shadow: 0 0 22px rgba(37, 99, 235, 0.4);
+      transition: width 0.15s ease-out;
+    }
+
+    .site-shell {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 4px;
+      z-index: 20;
+      padding: 18px 0 0;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      border-radius: 999px;
+      background: rgba(255, 250, 244, 0.78);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: white;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--amber) 100%);
+      box-shadow: 0 14px 28px rgba(37, 99, 235, 0.22);
+    }
+
+    .brand-copy {
+      min-width: 0;
+    }
+
+    .brand-copy strong,
+    h1,
+    h2,
+    h3,
+    .cta-button,
+    .nav-links,
+    .eyebrow,
+    summary,
+    .stat-value,
+    .section-kicker,
+    .pill,
+    .timeline-step span,
+    .mini-label {
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+    }
+
+    .brand-copy strong {
+      display: block;
+      font-size: 0.98rem;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-copy span {
+      display: block;
+      font-size: 0.83rem;
+      color: var(--ink-soft);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-size: 0.92rem;
+    }
+
+    .nav-links a:not(.cta-button) {
+      color: var(--ink-soft);
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:not(.cta-button):hover,
+    .inline-link:hover {
+      color: var(--blue-deep);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(19, 34, 56, 0.14);
+    }
+
+    .cta-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 48%, var(--amber) 100%);
+    }
+
+    .cta-secondary {
+      color: var(--ink);
+      border-color: var(--line);
+      background: rgba(255, 255, 255, 0.74);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 34px;
+      align-items: stretch;
+      padding: 54px 0 34px;
+    }
+
+    .hero-copy,
+    .hero-visual,
+    .panel,
+    .stats-band,
+    .cta-panel,
+    .footer-card {
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      background: var(--card);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 34px;
+      border-radius: var(--radius-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      right: -120px;
+      top: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(243, 163, 33, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--blue-deep);
+    }
+
+    .eyebrow::before,
+    .section-kicker::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--amber) 100%);
+      box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.08);
+    }
+
+    h1 {
+      margin: 18px 0 18px;
+      font-size: clamp(2.9rem, 5vw, 5rem);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+    }
+
+    .hero-lead {
+      font-size: 1.17rem;
+      color: var(--ink-soft);
+      max-width: 58ch;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+
+    .hero-note {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-top: 26px;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: rgba(19, 34, 56, 0.04);
+      border: 1px solid rgba(19, 34, 56, 0.08);
+      color: var(--ink-soft);
+    }
+
+    .hero-note strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .hero-visual {
+      padding: 26px;
+      border-radius: var(--radius-xl);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -60px -60px;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, transparent 70%);
+    }
+
+    .comparison-stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      position: relative;
+    }
+
+    .comparison-stage::before {
+      content: "From search result to AI shortlist";
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #fff9ef;
+      border: 1px solid rgba(243, 163, 33, 0.3);
+      color: var(--amber-deep);
+      font-family: "Trebuchet MS", "Gill Sans", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    .stage-card {
+      min-height: 314px;
+      padding: 54px 18px 18px;
+      border-radius: 22px;
+      position: relative;
+      overflow: hidden;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+    }
+
+    .stage-card h3 {
+      margin: 0 0 14px;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .stage-frame {
+      border-radius: 18px;
+      border: 1px solid rgba(19, 34, 56, 0.08);
+      background: linear-gradient(180deg, rgba(19, 34, 56, 0.04) 0%, rgba(255, 255, 255, 0.95) 100%);
+      padding: 14px;
+      min-height: 208px;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .window-dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(19, 34, 56, 0.16);
+    }
+
+    .search-line,
+    .answer-line,
+    .citation-pill,
+    .signal-chip,
+    .prompt-card,
+    .fix-card,
+    .stat-card,
+    .takeaway-card,
+    .faq-list details {
+      border-radius: var(--radius-md);
+    }
+
+    .search-line {
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(37, 99, 235, 0.16);
+      background: rgba(37, 99, 235, 0.05);
+    }
+
+    .search-line strong,
+    .answer-line strong,
+    .signal-chip strong,
+    .stat-value,
+    .timeline-step strong,
+    .fix-card h3,
+    .takeaway-card h3,
+    .prompt-card strong,
+    summary strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .search-line span,
+    .answer-line span,
+    .prompt-card p,
+    .fix-card p,
+    .takeaway-card p,
+    .cta-copy p,
+    .footer-card p,
+    .resource-list a,
+    .faq-list p,
+    .panel-intro,
+    .comparison-text,
+    .panel p,
+    .hero-note p {
+      color: var(--ink-soft);
+    }
+
+    .search-line.featured {
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.14) 0%, rgba(37, 99, 235, 0.06) 100%);
+      border-color: rgba(37, 99, 235, 0.28);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    }
+
+    .answer-line {
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(19, 34, 56, 0.08);
+      background: rgba(19, 34, 56, 0.04);
+      position: relative;
+    }
+
+    .answer-line::after {
+      content: "";
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(19, 34, 56, 0.22);
+      transform: translateY(-50%);
+    }
+
+    .answer-line.absent {
+      border-style: dashed;
+      opacity: 0.52;
+    }
+
+    .visual-tag-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pill,
+    .citation-pill,
+    .signal-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border: 1px solid rgba(19, 34, 56, 0.09);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .pill.highlight {
+      background: rgba(243, 163, 33, 0.12);
+      color: var(--amber-deep);
+      border-color: rgba(243, 163, 33, 0.3);
+    }
+
+    .section {
+      padding: 26px 0;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-header h2 {
+      margin: 14px 0 0;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .panel-grid,
+    .stats-grid,
+    .signal-grid,
+    .diagnosis-grid,
+    .fix-grid,
+    .takeaway-grid,
+    .resource-grid,
+    .footer-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .panel-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .panel {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+    }
+
+    .mini-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(19, 34, 56, 0.04);
+      color: var(--ink-soft);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .mini-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--amber) 100%);
+    }
+
+    .stats-band {
+      padding: 24px;
+      border-radius: var(--radius-xl);
+      margin: 20px 0 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .stats-band::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(243, 163, 33, 0.08) 100%);
+      pointer-events: none;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      position: relative;
+    }
+
+    .stat-card {
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .stat-value {
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      margin-bottom: 10px;
+    }
+
+    .stat-card:nth-child(1) .stat-value,
+    .stat-card:nth-child(3) .stat-value {
+      color: var(--blue-deep);
+    }
+
+    .stat-card:nth-child(2) .stat-value,
+    .stat-card:nth-child(4) .stat-value {
+      color: var(--amber-deep);
+    }
+
+    .signal-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .signal-chip {
+      min-height: 176px;
+      align-items: flex-start;
+      flex-direction: column;
+      padding: 18px;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .signal-chip .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.12) 0%, rgba(243, 163, 33, 0.15) 100%);
+      font-size: 1.2rem;
+    }
+
+    .comparison-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .comparison-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .comparison-card h3 {
+      margin: 12px 0;
+      font-size: 1.28rem;
+    }
+
+    .comparison-card.blur-side::before,
+    .comparison-card.clear-side::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+    }
+
+    .comparison-card.blur-side::before {
+      background: linear-gradient(90deg, rgba(19, 34, 56, 0.14) 0%, rgba(19, 34, 56, 0.34) 100%);
+    }
+
+    .comparison-card.clear-side::before {
+      background: linear-gradient(90deg, var(--blue) 0%, var(--amber) 100%);
+    }
+
+    .comparison-card ul,
+    .fix-card ul,
+    .takeaway-card ul,
+    .resource-list,
+    .checklist {
+      margin: 14px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .comparison-card li,
+    .fix-card li,
+    .takeaway-card li,
+    .resource-list li,
+    .checklist li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 11px;
+      color: var(--ink-soft);
+    }
+
+    .comparison-card li::before,
+    .fix-card li::before,
+    .takeaway-card li::before,
+    .resource-list li::before,
+    .checklist li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--amber) 100%);
+      transform: translateY(-50%);
+    }
+
+    .diagnosis-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: start;
+    }
+
+    .prompt-stack,
+    .checklist-panel {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .prompt-card {
+      padding: 16px 18px;
+      border: 1px solid rgba(19, 34, 56, 0.08);
+      background: rgba(19, 34, 56, 0.035);
+      margin-bottom: 12px;
+    }
+
+    .checklist-panel .pill {
+      margin-bottom: 10px;
+    }
+
+    .fix-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .fix-card,
+    .takeaway-card {
+      padding: 24px;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .fix-card h3,
+    .takeaway-card h3 {
+      margin-top: 10px;
+      font-size: 1.18rem;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .timeline-step {
+      padding: 18px 16px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.74) 100%);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+      min-height: 138px;
+    }
+
+    .timeline-step span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.09);
+      color: var(--blue-deep);
+      font-weight: 700;
+      font-size: 0.86rem;
+      margin-bottom: 12px;
+    }
+
+    .timeline-step p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.95rem;
+    }
+
+    .takeaway-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .faq-shell {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .faq-intro,
+    .faq-list {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .faq-list details {
+      padding: 16px 18px;
+      border: 1px solid rgba(19, 34, 56, 0.09);
+      background: rgba(19, 34, 56, 0.03);
+      margin-bottom: 12px;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .faq-list details[open] {
+      background: rgba(37, 99, 235, 0.05);
+      border-color: rgba(37, 99, 235, 0.2);
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      font-size: 1rem;
+      font-weight: 700;
+      padding-right: 34px;
+      position: relative;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 1.35rem;
+      line-height: 1;
+      color: var(--blue-deep);
+      transition: transform 0.2s ease;
+    }
+
+    details[open] summary::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      padding-top: 12px;
+      color: var(--ink-soft);
+    }
+
+    .faq-answer ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+    }
+
+    .faq-answer li {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+
+    .faq-answer li::before {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      left: 0;
+      top: 0.72em;
+      transform: translateY(-50%);
+      background: linear-gradient(135deg, var(--blue) 0%, var(--amber) 100%);
+    }
+
+    .cta-panel {
+      margin-top: 20px;
+      padding: 30px;
+      border-radius: var(--radius-xl);
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 24px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(243, 163, 33, 0.08) 100%);
+      pointer-events: none;
+    }
+
+    .cta-copy,
+    .resource-panel {
+      position: relative;
+    }
+
+    .cta-copy h2 {
+      margin: 14px 0 12px;
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .resource-panel {
+      padding: 22px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(19, 34, 56, 0.08);
+    }
+
+    .resource-grid {
+      grid-template-columns: 1fr 1fr;
+      margin-top: 18px;
+    }
+
+    .resource-list a {
+      color: var(--ink-soft);
+      transition: color 0.2s ease;
+    }
+
+    .resource-list a:hover {
+      color: var(--blue-deep);
+    }
+
+    .footer-wrap {
+      padding: 28px 0 54px;
+    }
+
+    .footer-card {
+      padding: 24px 26px;
+      border-radius: var(--radius-xl);
+    }
+
+    .footer-grid {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: start;
+    }
+
+    .inline-link {
+      color: var(--blue-deep);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .section-header,
+      .diagnosis-grid,
+      .faq-shell,
+      .cta-panel,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel-grid,
+      .comparison-layout,
+      .fix-grid,
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .signal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .takeaway-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .timeline,
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-shell {
+        width: min(calc(100% - 24px), var(--max));
+      }
+
+      .topbar-inner {
+        border-radius: 26px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .hero,
+      .section {
+        padding-top: 22px;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .stats-band,
+      .cta-panel,
+      .footer-card,
+      .panel,
+      .faq-intro,
+      .faq-list,
+      .prompt-stack,
+      .checklist-panel,
+      .comparison-card,
+      .resource-panel {
+        padding: 20px;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .comparison-stage,
+      .stats-grid,
+      .signal-grid,
+      .timeline,
+      .takeaway-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-stage::before {
+        position: static;
+        transform: none;
+        justify-self: start;
+        margin-bottom: 2px;
+      }
+
+      .stage-card {
+        min-height: auto;
+        padding-top: 20px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .cta-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" aria-hidden="true"><span id="progress-indicator"></span></div>
+
+  <header class="topbar">
+    <div class="site-shell topbar-inner">
+      <a class="brand" href="https://www.dominoeffectlabads.com/" target="_blank" rel="noopener noreferrer">
+        <span class="brand-mark">DEL</span>
+        <span class="brand-copy">
+          <strong>Domino Effect Lab Ads</strong>
+          <span>AI visibility, answer-driven discovery, and clearer brand signals</span>
+        </span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#what-changed">What Changed</a>
+        <a href="#signals">What AI Needs</a>
+        <a href="#diagnose">How To Check</a>
+        <a href="#faq">FAQ</a>
+        <a class="cta-button cta-primary" href="https://www.dominoeffectlabads.com/" target="_blank" rel="noopener noreferrer">Visit Domino Effect Lab Ads</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-shell">
+    <section class="hero" id="top">
+      <article class="hero-copy">
+        <span class="eyebrow">One-Page Article Experience</span>
+        <h1>Why ChatGPT Misses Your Business When Google Ranks It</h1>
+        <p class="hero-lead">If your business ranks well in search but still fails to appear inside ChatGPT, the problem is not just SEO. It is the gap between being found and being reused in an AI answer.</p>
+
+        <div class="hero-actions">
+          <a class="cta-button cta-primary" href="https://www.dominoeffectlabads.com/" target="_blank" rel="noopener noreferrer">Start With A Baseline</a>
+          <a class="cta-button cta-secondary" href="#diagnose">See How To Check</a>
+        </div>
+
+        <div class="hero-note">
+          <div class="brand-mark" style="width: 38px; height: 38px; border-radius: 12px; font-size: 0.78rem; flex: 0 0 auto;">AI</div>
+          <div>
+            <strong>The short answer</strong>
+            <p>A page can rank well on Google and still be too vague, too broad, too inconsistent, or too hard for ChatGPT to reuse cleanly.</p>
+          </div>
+        </div>
+      </article>
+
+      <aside class="hero-visual" aria-label="Search versus AI answer illustration">
+        <div class="comparison-stage">
+          <section class="stage-card">
+            <h3>Search Result Page</h3>
+            <div class="stage-frame">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <div class="search-line featured">
+                <strong>Domino Effect Lab Ads</strong>
+                <span>Visible on page one for the right commercial search.</span>
+              </div>
+              <div class="search-line">
+                <strong>Provider B</strong>
+                <span>Solid ranking, broad positioning.</span>
+              </div>
+              <div class="search-line">
+                <strong>Provider C</strong>
+                <span>Relevant page, weaker category clarity.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="stage-card">
+            <h3>AI Shortlist</h3>
+            <div class="stage-frame">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <div class="answer-line">
+                <strong>Provider B</strong>
+                <span>Clearer category, easier to describe.</span>
+              </div>
+              <div class="answer-line">
+                <strong>Provider C</strong>
+                <span>Stronger corroboration across sources.</span>
+              </div>
+              <div class="answer-line absent">
+                <strong>Your brand</strong>
+                <span>Ranked in search, missing from the answer.</span>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="visual-tag-row">
+          <span class="pill highlight">Ranked on Google</span>
+          <span class="pill">Missing in ChatGPT</span>
+          <span class="pill">Visible in search, absent in the answer</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="stats-band" id="what-changed">
+      <div class="section-header" style="margin-bottom: 18px;">
+        <div>
+          <span class="section-kicker">Why This Matters Now</span>
+          <h2>Buyer behaviour has shifted from links to shortlists.</h2>
+        </div>
+        <p class="panel-intro">BrightLocal's March 2026 research, as cited in the article, shows how quickly AI recommendations have moved into the real decision journey. This is no longer a fringe behaviour.</p>
+      </div>
+
+      <div class="stats-grid">
+        <article class="stat-card">
+          <div class="stat-value">45%</div>
+          <strong>Used AI tools</strong>
+          <span>for local business recommendations in the previous 12 months.</span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value">6%</div>
+          <strong>A year earlier</strong>
+          <span>the same behaviour was still early and niche.</span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value">31%</div>
+          <strong>ChatGPT usage</strong>
+          <span>as the leading tool for business recommendations.</span>
+        </article>
+        <article class="stat-card">
+          <div class="stat-value">23%</div>
+          <strong>Google AI Mode</strong>
+          <span>still matters, but it is not the whole picture anymore.</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="different-jobs">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">The Core Difference</span>
+          <h2>Google ranking and ChatGPT mentions are different jobs.</h2>
+        </div>
+        <p class="panel-intro">Good search performance helps your pages get found. It does not guarantee that the model will lift your business into the answer. The model still needs clean evidence it can trust and quote.</p>
+      </div>
+
+      <div class="panel-grid">
+        <article class="panel">
+          <span class="mini-label">Google</span>
+          <h3>Ranks pages worth showing</h3>
+          <p>Search engines decide which pages belong in results. That is a visibility problem at the page level.</p>
+          <ul class="checklist">
+            <li>Shows pages in response to a query</li>
+            <li>Rewards relevance and search intent</li>
+            <li>Helps discovery, not final phrasing</li>
+          </ul>
+        </article>
+
+        <article class="panel">
+          <span class="mini-label">ChatGPT</span>
+          <h3>Reuses facts it can trust</h3>
+          <p>Answer engines decide which pieces of information are clear, credible, and relevant enough to reuse inside the final response.</p>
+          <ul class="checklist">
+            <li>Looks for patterns, not just pages</li>
+            <li>Needs stronger category clarity</li>
+            <li>Favours evidence it can quote cleanly</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="signals">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">What AI Needs</span>
+          <h2>Five signals make a business easier to mention.</h2>
+        </div>
+        <p class="panel-intro">From the Domino material and the blog itself, the pattern is consistent: AI systems favour businesses that are easy to categorise, easy to verify, and easy to quote.</p>
+      </div>
+
+      <div class="signal-grid">
+        <article class="signal-chip">
+          <div class="icon">1</div>
+          <strong>Clear company description</strong>
+          <span>Say what the business is in direct language, not just tone and aspiration.</span>
+        </article>
+        <article class="signal-chip">
+          <div class="icon">2</div>
+          <strong>Answer-first structure</strong>
+          <span>Use clear headings, clear answers, and buyer-shaped language the model can lift.</span>
+        </article>
+        <article class="signal-chip">
+          <div class="icon">3</div>
+          <strong>Consistent facts</strong>
+          <span>Keep the same core story across the site, bios, mentions, and public references.</span>
+        </article>
+        <article class="signal-chip">
+          <div class="icon">4</div>
+          <strong>Supporting evidence</strong>
+          <span>Use specific service descriptions, proof points, labels, and direct definitions.</span>
+        </article>
+        <article class="signal-chip">
+          <div class="icon">5</div>
+          <strong>Reusable chunks</strong>
+          <span>Two or three clean sentences can outperform a long stretch of vague copy.</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="competitors">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Why Competitors Win</span>
+          <h2>The clearer brand often gets the mention.</h2>
+        </div>
+        <p class="panel-intro">When owners ask why a competitor gets named instead, the instinct is to blame rankings. Sometimes rankings matter. Very often the real gap is clarity and consistency.</p>
+      </div>
+
+      <div class="comparison-layout">
+        <article class="comparison-card blur-side">
+          <span class="mini-label">Blurry Brand</span>
+          <h3>Harder for AI to trust</h3>
+          <p class="comparison-text">The business may still rank, but the model has to guess what it is, how it should be described, and whether the signals really line up.</p>
+          <ul>
+            <li>Mixed labels across pages</li>
+            <li>Benefits explained before the category</li>
+            <li>Important facts scattered across the site</li>
+            <li>Thin support outside the main domain</li>
+          </ul>
+        </article>
+
+        <article class="comparison-card clear-side">
+          <span class="mini-label">Clear Brand</span>
+          <h3>Easier for AI to reuse</h3>
+          <p class="comparison-text">The brand looks more certain because the model sees the same core story repeated cleanly, with enough evidence to support the choice.</p>
+          <ul>
+            <li>Direct category language</li>
+            <li>Strong FAQ and answer-first sections</li>
+            <li>Consistent wording across the site</li>
+            <li>Better corroboration beyond the website</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="hero-note" style="margin-top: 18px;">
+        <div class="brand-mark" style="width: 38px; height: 38px; border-radius: 12px; font-size: 0.82rem; flex: 0 0 auto;">Q</div>
+        <div>
+          <strong>Mentioned is not enough</strong>
+          <p>The same research picture behind the article also notes that 97% of consumers read reviews for local businesses, while 88% fact-check reviews cited by AI. Clear and credible beats vague and partially correct.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="diagnose">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">How To Tell</span>
+          <h2>Check the answer, not just the analytics.</h2>
+        </div>
+        <p class="panel-intro">A lot of businesses only spot the issue when they test real prompts and see what comes back. The practical check is simple: run buyer-style prompts, compare the outputs, and inspect the signal quality.</p>
+      </div>
+
+      <div class="diagnosis-grid">
+        <article class="prompt-stack">
+          <span class="mini-label">Prompt Audit</span>
+          <div class="prompt-card">
+            <strong>Who are the best [category] providers in [location]?</strong>
+            <p>Checks whether the brand appears in commercial shortlists.</p>
+          </div>
+          <div class="prompt-card">
+            <strong>Which companies help with [problem you solve]?</strong>
+            <p>Tests category clarity and commercial positioning.</p>
+          </div>
+          <div class="prompt-card">
+            <strong>What does [your brand] do?</strong>
+            <p>Shows whether the model can describe the business cleanly.</p>
+          </div>
+          <div class="prompt-card" style="margin-bottom: 0;">
+            <strong>What are the best alternatives to [competitor]?</strong>
+            <p>Reveals whether the brand gets picked up in lateral comparisons.</p>
+          </div>
+        </article>
+
+        <aside class="checklist-panel">
+          <span class="pill highlight">What to look for</span>
+          <ul class="checklist">
+            <li>Are you mentioned at all?</li>
+            <li>Is the description accurate?</li>
+            <li>Does the category sound right?</li>
+            <li>Do competitors appear more often than you?</li>
+            <li>Are strong facts scattered instead of clearly stated?</li>
+            <li>Does the wider footprint look thin or inconsistent?</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="fix">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">What To Fix First</span>
+          <h2>Do not publish more noise. Improve the shape of the information.</h2>
+        </div>
+        <p class="panel-intro">The first job is to make your most important information easier to understand and easier to trust. That means better structure, better wording, and a measurable baseline before random activity begins.</p>
+      </div>
+
+      <div class="fix-grid">
+        <article class="fix-card">
+          <span class="mini-label">Start Here</span>
+          <h3>Tighten the core description</h3>
+          <p>Make sure the main pages say what the business is, who it helps, and what problem it solves in direct language.</p>
+          <ul>
+            <li>Repeat the same wording where it matters most</li>
+            <li>Lead with the category, not only the benefits</li>
+          </ul>
+        </article>
+
+        <article class="fix-card">
+          <span class="mini-label">Page Shape</span>
+          <h3>Rework key pages into answer-first pages</h3>
+          <p>Broad marketing copy is weak material for AI systems. Strong FAQs, definitions, and comparison blocks are easier to reuse.</p>
+          <ul>
+            <li><a class="inline-link" href="https://dominoeffectlabads.com/faq" target="_blank" rel="noopener noreferrer">See the Domino FAQ page</a></li>
+            <li><a class="inline-link" href="https://dominoeffectlabads.com/post/why-brands-get-left-out-of-ai-search-even-when-seo-looks-healthy" target="_blank" rel="noopener noreferrer">Read the related article</a></li>
+          </ul>
+        </article>
+
+        <article class="fix-card">
+          <span class="mini-label">Support Signals</span>
+          <h3>Improve the signal beyond your website</h3>
+          <p>You do not need to be everywhere. You do need enough supporting evidence that the business feels real, specific, and consistent across the web.</p>
+          <ul>
+            <li>Use founder profiles, public references, and credible mentions</li>
+            <li>Keep the same core message everywhere</li>
+          </ul>
+        </article>
+
+        <article class="fix-card">
+          <span class="mini-label">Baseline</span>
+          <h3>Benchmark what AI says now</h3>
+          <p>Before changing everything, get a baseline of how the main tools currently describe the brand.</p>
+          <ul>
+            <li><a class="inline-link" href="https://dominoeffectlabads.com/product-page/ai-visibility-footprint-scanner" target="_blank" rel="noopener noreferrer">AI Visibility Footprint Scanner</a></li>
+            <li><a class="inline-link" href="https://dominoeffectlabads.com/product-page/ai-pulse-visibility-scorecard" target="_blank" rel="noopener noreferrer">AI Pulse Visibility Scorecard</a></li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="timeline" aria-label="Improvement sequence">
+        <article class="timeline-step"><span>1</span><strong>Baseline the current answer</strong><p>Start by measuring what AI tools already say.</p></article>
+        <article class="timeline-step"><span>2</span><strong>Tighten the company description</strong><p>Remove mixed labels and vague positioning.</p></article>
+        <article class="timeline-step"><span>3</span><strong>Rebuild key pages</strong><p>Use answer-first sections the model can reuse.</p></article>
+        <article class="timeline-step"><span>4</span><strong>Strengthen support signals</strong><p>Reinforce the same message beyond the site.</p></article>
+        <article class="timeline-step"><span>5</span><strong>Retest the same prompts</strong><p>Measure whether clarity is improving mention quality.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="takeaways">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">Key Takeaways</span>
+          <h2>Clarity and consistency drive AI mention quality.</h2>
+        </div>
+        <p class="panel-intro">The article comes back to one repeated point: the gap is rarely solved by louder marketing. It is usually solved by cleaner information, stronger structure, and a clearer brand signal.</p>
+      </div>
+
+      <div class="takeaway-grid">
+        <article class="takeaway-card">
+          <span class="mini-label">1</span>
+          <h3>Search visibility is not answer visibility</h3>
+          <p>Ranking on Google and being mentioned in ChatGPT are connected, but they are not the same thing.</p>
+        </article>
+        <article class="takeaway-card">
+          <span class="mini-label">2</span>
+          <h3>AI prefers clean evidence</h3>
+          <p>AI systems favour brands that are easy to categorise, easy to verify, and easy to quote.</p>
+        </article>
+        <article class="takeaway-card">
+          <span class="mini-label">3</span>
+          <h3>The fastest diagnostic is prompt testing</h3>
+          <p>Test real buyer prompts and inspect how the major tools currently describe your brand.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="section-header">
+        <div>
+          <span class="section-kicker">FAQ</span>
+          <h2>Short answers for the questions buyers are already asking.</h2>
+        </div>
+        <p class="panel-intro">This FAQ keeps the article practical. Each answer is short, direct, and built to clarify the difference between visibility in search and visibility in AI answers.</p>
+      </div>
+
+      <div class="faq-shell">
+        <aside class="faq-intro">
+          <span class="mini-label">Why this matters</span>
+          <h3 style="margin: 12px 0; font-size: 1.45rem;">If your brand misses the shortlist, it misses the decision moment.</h3>
+          <p>The question is not whether your business has a website. The question is whether AI systems can understand it well enough to trust, describe, and reuse it.</p>
+          <div class="visual-tag-row" style="margin-top: 18px;">
+            <span class="pill">Category clarity</span>
+            <span class="pill">Reusable answers</span>
+            <span class="pill">Consistent facts</span>
+          </div>
+        </aside>
+
+        <div class="faq-list">
+          <details>
+            <summary><strong>Why doesn't ChatGPT mention my business even though I rank on Google?</strong></summary>
+            <div class="faq-answer">
+              <p>Because ranking a page and selecting a brand for an AI answer are different decisions.</p>
+              <ul>
+                <li>Google decides which pages to show.</li>
+                <li>ChatGPT decides which facts it can reuse.</li>
+                <li>A page can rank and still be too vague for the model.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary><strong>How do I get my business to show up in ChatGPT answers?</strong></summary>
+            <div class="faq-answer">
+              <p>Make the business easier to understand, verify, and quote.</p>
+              <ul>
+                <li>Use direct category language.</li>
+                <li>Rework key pages into answer-first pages.</li>
+                <li>Strengthen consistent signals across public sources.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary><strong>Why does ChatGPT recommend my competitor instead of me?</strong></summary>
+            <div class="faq-answer">
+              <p>The competitor often looks clearer and more certain, not just better ranked.</p>
+              <ul>
+                <li>Stronger FAQ coverage helps.</li>
+                <li>More consistent wording helps.</li>
+                <li>Better corroboration helps.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary><strong>Does ChatGPT only use my website to understand my business?</strong></summary>
+            <div class="faq-answer">
+              <p>No. The website matters, but it is not always enough on its own.</p>
+              <ul>
+                <li>Profiles and bios can reinforce the category.</li>
+                <li>Mentions and reviews help confirm facts.</li>
+                <li>Thin outside signals can still weaken the picture.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary><strong>What makes content easier for ChatGPT to mention?</strong></summary>
+            <div class="faq-answer">
+              <p>Content becomes easier to mention when it answers real buyer questions directly.</p>
+              <ul>
+                <li>Clear headings help.</li>
+                <li>Useful definitions help.</li>
+                <li>Short reusable chunks help.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary><strong>How do I check what ChatGPT currently says about my business?</strong></summary>
+            <div class="faq-answer">
+              <p>Run buyer-style prompts and inspect the output critically.</p>
+              <ul>
+                <li>Check whether the brand appears.</li>
+                <li>Check whether the category is correct.</li>
+                <li>Check which signals seem to shape the answer.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary><strong>Do I need to publish more content to get mentioned in ChatGPT?</strong></summary>
+            <div class="faq-answer">
+              <p>Not usually. The first problem is often the shape of the information.</p>
+              <ul>
+                <li>Generic content does not fix weak structure.</li>
+                <li>Clearer information matters more than more information.</li>
+                <li>Supporting evidence still needs the same message.</li>
+              </ul>
+            </div>
+          </details>
+
+          <details>
+            <summary><strong>What should I fix first if ChatGPT is ignoring my business?</strong></summary>
+            <div class="faq-answer">
+              <p>Start with the core company description and the key pages.</p>
+              <ul>
+                <li>State what the business is clearly.</li>
+                <li>Repeat that wording consistently.</li>
+                <li>Baseline AI outputs before wider changes.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-panel" id="cta">
+      <div class="cta-copy">
+        <span class="section-kicker">Domino Effect Lab Ads</span>
+        <h2>See how AI sees your brand before you change the wrong thing.</h2>
+        <p>If this gap is showing up in your market, the fix is usually not louder marketing. It is clearer information, better structure, and a measurable baseline of what AI systems actually say today.</p>
+        <div class="hero-actions" style="margin-top: 22px;">
+          <a class="cta-button cta-primary" href="https://www.dominoeffectlabads.com/" target="_blank" rel="noopener noreferrer">Go To Domino Effect Lab Ads</a>
+          <a class="cta-button cta-secondary" href="https://dominoeffectlabads.com/product-page/ai-visibility-footprint-scanner" target="_blank" rel="noopener noreferrer">Open The Footprint Scanner</a>
+        </div>
+      </div>
+
+      <aside class="resource-panel">
+        <span class="mini-label">Useful links</span>
+        <div class="resource-grid">
+          <ul class="resource-list">
+            <li><a href="https://www.dominoeffectlabads.com/" target="_blank" rel="noopener noreferrer">Domino homepage</a></li>
+            <li><a href="https://dominoeffectlabads.com/faq" target="_blank" rel="noopener noreferrer">FAQ page</a></li>
+            <li><a href="https://dominoeffectlabads.com/product-page/ai-pulse-visibility-scorecard" target="_blank" rel="noopener noreferrer">AI Pulse Visibility Scorecard</a></li>
+          </ul>
+          <ul class="resource-list">
+            <li><a href="https://dominoeffectlabads.com/product-page/ai-visibility-footprint-scanner" target="_blank" rel="noopener noreferrer">AI Visibility Footprint Scanner</a></li>
+            <li><a href="https://dominoeffectlabads.com/post/why-brands-get-left-out-of-ai-search-even-when-seo-looks-healthy" target="_blank" rel="noopener noreferrer">Related article</a></li>
+            <li><a href="#top">Back to top</a></li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="footer-wrap">
+    <div class="site-shell footer-card">
+      <div class="footer-grid">
+        <div>
+          <span class="mini-label">Article Summary</span>
+          <h3 style="margin: 12px 0 8px; font-size: 1.4rem;">Ranking on Google is still useful. It is just not the full job anymore.</h3>
+          <p>This one-page site was built from the blog article "Why doesn't ChatGPT mention my business even though I rank on Google?" and turns the argument into a more visual reading experience. The underlying point stays the same: if the business is hard to categorise, hard to verify, or hard to quote, AI answers can still leave it out.</p>
+        </div>
+        <div>
+          <span class="mini-label">Next step</span>
+          <p>Start with a baseline on <a class="inline-link" href="https://www.dominoeffectlabads.com/" target="_blank" rel="noopener noreferrer">Domino Effect Lab Ads</a>. Then use the same prompts again after the important pages and supporting signals have been cleaned up.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var indicator = document.getElementById('progress-indicator');
+      function updateProgress() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        indicator.style.width = Math.min(100, Math.max(0, progress)) + '%';
+      }
+      updateProgress();
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      window.addEventListener('resize', updateProgress);
+    }());
+  </script>
+</body>
+</html>
